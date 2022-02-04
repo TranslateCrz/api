@@ -1,6 +1,15 @@
+###> app ###
+/upload/
+###< app ###
+
+###> ide ###
 .idea
+###< ide ###
+
+###> file system ###
 .DS_Store
 Thumbs.db
+###< file system ###
 
 ###> symfony/framework-bundle ###
 /.env.local
