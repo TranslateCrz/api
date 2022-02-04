@@ -1,0 +1,48 @@
+version: "3.7"
+
+services:
+  db:
+    image: mysql:latest
+    container_name: localize-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: localize
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: admin
+      MYSQL_USER: user
+    volumes:
+      - ./docker/mysql:/var/lib
+      - ./application/api/migration:/migration
+    networks:
+      - database
+
+  nginx:
+    image: nginx:1.20.0
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx:/etc/nginx/conf.d
+    networks:
+      - database
+
+  app:
+    build:
+      args:
+        user: localize
+        uid: 1000
+      context: ./
+      dockerfile: ./docker/php/Dockerfile
+    container_name: localize-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www/
+      - ./upload/:/var/www/public/upload/
+    networks:
+      - database
+
+networks:
+  database:
+    driver: bridge
