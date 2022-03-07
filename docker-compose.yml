@@ -22,8 +22,8 @@ services:
     ports:
       - 8000:80
     volumes:
-      - ./:/var/www
-      - ./docker/nginx:/etc/nginx/conf.d
+      - ./:/var/www/
+      - ./docker/nginx/:/etc/nginx/conf.d/
     networks:
       - database
 
