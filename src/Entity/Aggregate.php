@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\Uuid;
 
 #[ORM\MappedSuperclass]
-class Aggregate
+abstract class Aggregate
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

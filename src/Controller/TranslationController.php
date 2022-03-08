@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Application\Dto\TranslationDto;
 use App\Application\Service\TranslationService;
 use App\View\TranslationPresenter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,7 +24,12 @@ class TranslationController extends AbstractController
     #[Route('/translation', methods: ['POST'])]
     public function create(Request $request): Response
     {
-        return $this->json(['todo']);
+        $dto = new TranslationDto();
+        $body = $request->toArray();
+        $dto->code = $body['code'] ?? null;
+        $dto->country = $body['country'] ?? null;
+        $dto->value = $body['value'] ?? null;
+        return $this->json($this->translationPresenter->presentTranslation($this->translationService->create($dto)));
     }
 
     #[Route('/translation/{id}')]
@@ -39,14 +45,16 @@ class TranslationController extends AbstractController
     }
 
     #[Route('/translation/{id}', methods: ['PUT'])]
-    public function update(string $id): Response
+    public function update(string $id, Request $request): Response
     {
-        return $this->json(['todo']);
+        $dto = new TranslationDto();
+        $dto->value = $request->toArray()['value'] ?? null;
+        return $this->json($this->translationPresenter->presentTranslation($this->translationService->update($id, $dto)));
     }
 
     #[Route('/translation/{id}', methods: ['DELETE'])]
     public function delete(string $id): Response
     {
-        return $this->json(['todo']);
+        return $this->json($this->translationService->delete($id));
     }
 }
