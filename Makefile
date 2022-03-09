@@ -1,3 +1,5 @@
+.SILENT:
+
 CON = bin/console
 
 db-create:

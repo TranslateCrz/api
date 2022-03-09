@@ -20,5 +20,13 @@ Pour un PO/Admin/Client: Crud de traduction via un back-office, exportation de f
 
 Pour un Dev: Crud de traduction via soi composant Front ou back-office, exportation des clés de traduction pour utilisation
 
+## Launch API
 
+* Create docker images : ```docker compose up -d```
+* Go inside the php container : ```docker exec -it localize-app sh```
+* Install dependencies : ```composer install```
+* Create the database, execute migrations and load fixtures :```make clear```
 
+## API documentation
+
+The swagger documentation is available in [localhost:8000/doc.json](localhost:8000/doc.json)

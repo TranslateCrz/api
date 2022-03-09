@@ -10,6 +10,7 @@ ARG ssh_pub_key
 # Install system dependencies
 RUN apk update && apk add \
     git \
+    make \
     curl \
     libpng-dev \
     libxml2-dev \
