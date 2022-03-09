@@ -17,6 +17,9 @@ class Translation extends Aggregate
     #[ORM\Column(type: 'string', length: 3)]
     private string $country;
 
+    #[ORM\ManyToOne(targetEntity: Account::class)]
+    private ?Account $account = null;
+
     public function __construct(string $code, string $country = 'FRA')
     {
         parent::__construct();
@@ -45,5 +48,17 @@ class Translation extends Aggregate
     public function getCountry(): string
     {
         return $this->country;
+    }
+
+    public function getAccount(): ?Account
+    {
+        return $this->account;
+    }
+
+    public function setAccount(?Account $account): self
+    {
+        $this->account = $account;
+
+        return $this;
     }
 }

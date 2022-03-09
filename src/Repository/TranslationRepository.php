@@ -63,6 +63,6 @@ class TranslationRepository extends ServiceEntityRepository implements Translati
 
     public function findByUuid(string $id): ?Translation
     {
-        return $this->findBy([ 'uuid' =>  $id]);
+        return $this->findOneBy([ 'uuid' =>  $id]);
     }
 }

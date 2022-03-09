@@ -12,5 +12,5 @@ class TranslationDto
     #[Assert\Country]
     public string $country;
 
-    public string $value;
+    public ?string $value;
 }
