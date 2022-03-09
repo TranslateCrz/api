@@ -10,7 +10,7 @@ class RegisterDto
     public string $email;
 
     #[Assert\All([
-        new Assert\Country
+        new Assert\Language
     ])]
     public array $countries;
 

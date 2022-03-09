@@ -19,7 +19,7 @@ class AppFixtures extends Fixture
             [
                 'email' => 'c_croizat@hetic.eu',
                 'company' => 'Hetic',
-                'countries' => ['FR', 'EN', 'ES'],
+                'countries' => ['fr', 'en', 'es'],
                 'roles' => ['ROLE_USER', 'ROLE_ADMIN'],
             ]
         ];

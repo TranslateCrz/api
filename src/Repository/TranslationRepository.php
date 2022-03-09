@@ -44,6 +44,7 @@ class TranslationRepository extends ServiceEntityRepository implements Translati
     public function delete(Aggregate $aggregate): void
     {
         $this->_em->remove($aggregate);
+        $this->_em->flush();
     }
 
     public function findByUuid(string $id): ?Translation
@@ -51,6 +52,19 @@ class TranslationRepository extends ServiceEntityRepository implements Translati
         return $this->createQueryBuilder('a')
             ->andWhere('a.uuid = :val')
             ->setParameter('val', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
+    public function findByAccountAndCode(Account $account, string $code): ?Translation
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.account = :val')
+            ->setParameter('val', $account)
+            ->andWhere('a.code = :code')
+            ->setParameter('code', $code)
+            ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult()
             ;

@@ -59,6 +59,7 @@ class AccountRepository extends ServiceEntityRepository implements AccountReposi
     public function delete(Aggregate $aggregate): void
     {
         $this->_em->remove($aggregate);
+        $this->_em->flush();
     }
 
     public function findByUuid(string $id): ?Account

@@ -19,7 +19,7 @@ class AdminController extends AbstractController
         $this->presenter = $presenter;
     }
 
-    #[Route('/')]
+    #[Route('/', methods: ['GET'])]
     public function index(): Response
     {
         return $this->json([
@@ -27,7 +27,7 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/account')]
+    #[Route('/admin/account', methods: ['GET'])]
     public function getAccounts(): Response
     {
         return $this->json($this->presenter->presentAccounts($this->accountService->getAll()));

@@ -32,7 +32,7 @@ class AccountController extends AbstractController
         return $this->json($this->presenter->presentAccount($this->accountService->create($dto)));
     }
 
-    #[Route('/login')]
+    #[Route('/login', methods: ['POST'])]
     public function login(Request $request): Response
     {
         if (!$user = $this->accountService->getByEmail($request->toArray()['email'] ?? '')) {
@@ -41,7 +41,7 @@ class AccountController extends AbstractController
         return $this->json(['token' => $user->getEmail()]);
     }
 
-    #[Route('/profile')]
+    #[Route('/profile', methods: ['GET'])]
     public function getMe(): Response
     {
         if (!$user = $this->accountService->get()) {

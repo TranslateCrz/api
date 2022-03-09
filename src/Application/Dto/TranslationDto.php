@@ -9,7 +9,7 @@ class TranslationDto
     #[Assert\NotBlank]
     public string $code;
 
-    #[Assert\Country]
+    #[Assert\Language]
     public string $country;
 
     public ?string $value;

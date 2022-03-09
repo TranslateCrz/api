@@ -32,13 +32,13 @@ class TranslationController extends AbstractController
         return $this->json($this->translationPresenter->presentTranslation($this->translationService->create($dto)));
     }
 
-    #[Route('/translation/{id}')]
+    #[Route('/translation/{id}', methods: ['GET'])]
     public function get(string $id): Response
     {
         return $this->json($this->translationPresenter->presentTranslation($this->translationService->get($id)));
     }
 
-    #[Route('/translation')]
+    #[Route('/translation', methods: ['GET'])]
     public function getAll(): Response
     {
         return $this->json($this->translationPresenter->presentTranslations($this->translationService->getAll()));

@@ -7,6 +7,7 @@ use App\Application\Repository\TranslationRepositoryInterface;
 use App\Application\Validator\Validator;
 use App\Domain\Factory\TranslationFactory;
 use App\Domain\Service\TranslationService as TranslationDomainService;
+use App\Entity\Account;
 use App\Entity\Translation;
 use Symfony\Component\Security\Core\Security;
 
@@ -34,10 +35,23 @@ class TranslationService
 
     public function create(TranslationDto $dto): Translation
     {
-        $this->validator->validate($dto);
+        /**
+         * @var Account $account
+         */
+        $account = $this->security->getUser();
+        if ($translation = $this->repository->findByAccountAndCode($account, $dto->code)) {
+            return $translation;
+        }
 
-        $translation = $this->factory->createTranslation($this->security->getUser(), $dto->code, $dto->country, $dto->value);
-        $this->repository->save($translation);
+        $this->validator->validate($dto);
+        foreach ($account->getCountries() as $country) {
+            if ($country === $dto->country) {
+                $t = $translation = $this->factory->createTranslation($account, $dto->code, $dto->country, $dto->value);
+            } else {
+                $t = $this->factory->createTranslation($account, $dto->code, $country);
+            }
+            $this->repository->save($t);
+        }
 
         return $translation;
     }
@@ -66,6 +80,12 @@ class TranslationService
             $translation = $this->service->updateTranslation($translation, $dto->value);
             $this->repository->save($translation);
         }
+        // send message
+//        {
+//            "Src": "EN",
+//          "Val": "Welcome to Hetic-localize",
+//          "Key": "welcome.user"
+//        }
 
         return $translation;
     }
