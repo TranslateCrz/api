@@ -97,11 +97,50 @@
     "doctrine/sql-formatter": {
         "version": "1.1.2"
     },
+    "firebase/php-jwt": {
+        "version": "v5.5.1"
+    },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
     },
+    "google/auth": {
+        "version": "v1.18.0"
+    },
+    "google/cloud-core": {
+        "version": "v1.44.0"
+    },
+    "google/cloud-pubsub": {
+        "version": "v1.35.0"
+    },
+    "google/common-protos": {
+        "version": "2.0.0"
+    },
+    "google/gax": {
+        "version": "v1.12.0"
+    },
+    "google/grpc-gcp": {
+        "version": "v0.2.0"
+    },
+    "google/protobuf": {
+        "version": "v3.19.4"
+    },
+    "grpc/grpc": {
+        "version": "1.42.0"
+    },
+    "guzzlehttp/guzzle": {
+        "version": "7.4.1"
+    },
+    "guzzlehttp/promises": {
+        "version": "1.5.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "2.1.0"
+    },
     "laminas/laminas-code": {
         "version": "4.5.1"
+    },
+    "monolog/monolog": {
+        "version": "2.3.5"
     },
     "nelmio/api-doc-bundle": {
         "version": "4.8",
@@ -140,14 +179,29 @@
     "psr/event-dispatcher": {
         "version": "1.0.0"
     },
+    "psr/http-client": {
+        "version": "1.0.1"
+    },
+    "psr/http-factory": {
+        "version": "1.0.1"
+    },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
     "psr/log": {
         "version": "1.1.4"
+    },
+    "ralouphie/getallheaders": {
+        "version": "3.0.3"
     },
     "ramsey/collection": {
         "version": "1.2.2"
     },
     "ramsey/uuid": {
         "version": "4.2.3"
+    },
+    "rize/uri-template": {
+        "version": "0.3.4"
     },
     "symfony/apache-pack": {
         "version": "1.0",
@@ -346,6 +400,22 @@
     "symfony/translation-contracts": {
         "version": "v2.5.0"
     },
+    "symfony/twig-bridge": {
+        "version": "v5.4.5"
+    },
+    "symfony/twig-bundle": {
+        "version": "5.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.4",
+            "ref": "bb2178c57eee79e6be0b297aa96fc0c0def81387"
+        },
+        "files": [
+            "config/packages/twig.yaml",
+            "templates/base.html.twig"
+        ]
+    },
     "symfony/validator": {
         "version": "5.4",
         "recipe": {
@@ -364,8 +434,24 @@
     "symfony/var-exporter": {
         "version": "v5.4.3"
     },
+    "symfony/web-profiler-bundle": {
+        "version": "5.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.3",
+            "ref": "24bbc3d84ef2f427f82104f766014e799eefcc3e"
+        },
+        "files": [
+            "config/packages/web_profiler.yaml",
+            "config/routes/web_profiler.yaml"
+        ]
+    },
     "symfony/yaml": {
         "version": "v5.4.3"
+    },
+    "twig/twig": {
+        "version": "v3.3.8"
     },
     "webmozart/assert": {
         "version": "1.10.0"

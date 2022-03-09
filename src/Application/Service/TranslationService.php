@@ -6,6 +6,7 @@ use App\Application\Dto\TranslationDto;
 use App\Application\Repository\TranslationRepositoryInterface;
 use App\Application\Validator\Validator;
 use App\Domain\Factory\TranslationFactory;
+use App\Domain\Service\MessageServiceInterface;
 use App\Domain\Service\TranslationService as TranslationDomainService;
 use App\Entity\Account;
 use App\Entity\Translation;
@@ -18,19 +19,22 @@ class TranslationService
     protected TranslationRepositoryInterface $repository;
     protected Validator $validator;
     protected Security $security;
+    protected MessageServiceInterface $messageService;
 
     public function __construct(
         TranslationFactory $factory,
         TranslationDomainService $service,
         TranslationRepositoryInterface $repository,
         Validator $validator,
-        Security $security
+        Security $security,
+        MessageServiceInterface $messageService
     ) {
         $this->factory = $factory;
         $this->service = $service;
         $this->repository = $repository;
         $this->validator = $validator;
         $this->security = $security;
+        $this->messageService = $messageService;
     }
 
     public function create(TranslationDto $dto): Translation
@@ -51,6 +55,9 @@ class TranslationService
                 $t = $this->factory->createTranslation($account, $dto->code, $country);
             }
             $this->repository->save($t);
+        }
+        if ($dto->value) {
+            $this->messageService->publish($translation);
         }
 
         return $translation;
@@ -80,12 +87,7 @@ class TranslationService
             $translation = $this->service->updateTranslation($translation, $dto->value);
             $this->repository->save($translation);
         }
-        // send message
-//        {
-//            "Src": "EN",
-//          "Val": "Welcome to Hetic-localize",
-//          "Key": "welcome.user"
-//        }
+        $this->messageService->publish($translation);
 
         return $translation;
     }
