@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Application\Repository\TranslationRepositoryInterface;
+use App\Entity\Account;
 use App\Entity\Aggregate;
 use App\Entity\Translation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -21,34 +22,18 @@ class TranslationRepository extends ServiceEntityRepository implements Translati
         parent::__construct($registry, Translation::class);
     }
 
-    // /**
-    //  * @return Translation[] Returns an array of Translation objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Translation[] Returns an array of Translation objects
+     */
+    public function findByAccount(Account $account)
     {
         return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('t.account = :val')
+            ->setParameter('val', $account)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Translation
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 
     public function save(Aggregate $aggregate): void
     {
@@ -63,6 +48,11 @@ class TranslationRepository extends ServiceEntityRepository implements Translati
 
     public function findByUuid(string $id): ?Translation
     {
-        return $this->findOneBy([ 'uuid' =>  $id]);
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.uuid = :val')
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
     }
 }

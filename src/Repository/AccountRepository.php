@@ -63,7 +63,12 @@ class AccountRepository extends ServiceEntityRepository implements AccountReposi
 
     public function findByUuid(string $id): ?Account
     {
-        return $this->findOneBy([ 'uuid' =>  $id]);
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.uuid = :val')
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
     }
 
     public function findByEmail(string $email): ?Account
