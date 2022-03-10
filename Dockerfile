@@ -34,6 +34,6 @@ WORKDIR /var/www
 
 COPY . /var/www
 
-RUN composer install --no-dev --no-interaction -o
+RUN composer install
 
 USER $user
