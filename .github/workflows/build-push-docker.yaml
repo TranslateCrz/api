@@ -27,4 +27,4 @@ jobs:
           with:
             push: true
             file: ../../docker/php/Dockerfile
-            tags: guillaudev/localize_api:latest
+            tags: guillaudev/localize_app:latest
