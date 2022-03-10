@@ -44,6 +44,13 @@ class TranslationController extends AbstractController
         return $this->json($this->translationPresenter->presentTranslations($this->translationService->getAll()));
     }
 
+    #[Route('/translation/codes', methods: ['POST'])]
+    public function addCodes(Request $request): Response
+    {
+        $this->translationService->createCodes($request->toArray());
+        return $this->json(['success' => true, 'codes' => count($request->toArray())]);
+    }
+
     #[Route('/translation/{id}', methods: ['PUT'])]
     public function update(string $id, Request $request): Response
     {

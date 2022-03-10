@@ -54,13 +54,31 @@ class TranslationService
             } else {
                 $t = $this->factory->createTranslation($account, $dto->code, $country);
             }
-            $this->repository->save($t);
+            $this->repository->persist($t);
         }
+        $this->repository->flush();
         if ($dto->value) {
             $this->messageService->publish($translation);
         }
 
         return $translation;
+    }
+
+    public function createCodes(array $codes): void
+    {
+        /**
+         * @var Account $account
+         */
+        $account = $this->security->getUser();
+        foreach ($codes as $code) {
+            if ($this->repository->findByAccountAndCode($account, $code)) {
+                continue;
+            }
+            foreach ($account->getCountries() as $country) {
+                $this->repository->persist($this->factory->createTranslation($account, $code, $country));
+            }
+        }
+        $this->repository->flush();
     }
 
     public function get(string $id): ?Translation

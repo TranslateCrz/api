@@ -41,6 +41,16 @@ class TranslationRepository extends ServiceEntityRepository implements Translati
         $this->_em->flush();
     }
 
+    public function persist(Aggregate $aggregate): void
+    {
+        $this->_em->persist($aggregate);
+    }
+
+    public function flush(): void
+    {
+        $this->_em->flush();
+    }
+
     public function delete(Aggregate $aggregate): void
     {
         $this->_em->remove($aggregate);
