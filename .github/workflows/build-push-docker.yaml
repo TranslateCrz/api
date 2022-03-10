@@ -26,5 +26,5 @@ jobs:
           uses: docker/build-push-action@v2
           with:
             push: true
-            file: ../../docker/php/Dockerfile
+            file: ../../Dockerfile
             tags: guillaudev/localize_app:latest
