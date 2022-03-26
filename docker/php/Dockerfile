@@ -1,8 +1,8 @@
 FROM php:8.1-fpm-alpine
 
 # Arguments defined in docker-compose.yml
-ARG user=localize
-ARG uid=1000
+ARG user
+ARG uid
 
 ARG ssh_prv_key
 ARG ssh_pub_key
@@ -31,9 +31,5 @@ RUN mkdir -p /home/$user/.composer && \
 
 # Set working directory
 WORKDIR /var/www
-
-COPY . /var/www
-
-RUN composer install
 
 USER $user
