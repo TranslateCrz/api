@@ -20,3 +20,15 @@ clear:
 	$(MAKE) db-reset
 	$(MAKE) fixtures-install
 	php -d memory_limit=-1 $(CON) cache:clear
+
+test-unit:
+	php bin/phpunit tests/Unit
+
+test-static:
+	php vendor/bin/phpstan analyse -l 3 src tests
+
+test-psr:
+	php tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --dry-run
+
+psr:
+	php tools/php-cs-fixer/vendor/bin/php-cs-fixer fix

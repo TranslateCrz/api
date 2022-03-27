@@ -14,7 +14,7 @@ class GCPMessageService implements MessageServiceInterface
     public function __construct(string $gcp_topic, string $gcp_keyfile, string $project_dir)
     {
         $pubSub = new PubSubClient([
-            'keyFilePath' => $project_dir.$gcp_keyfile
+            'keyFilePath' => $project_dir.$gcp_keyfile,
         ]);
         $this->topic = $pubSub->topic($gcp_topic);
     }
