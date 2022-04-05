@@ -1,0 +1,15 @@
+name: Run tests
+
+on: [push]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Docker container local action
+        uses: ./.github/actions/
+      - run: composer install
+      - run: make test-psr
+      - run: make test-static
+      - run: make test-unit
