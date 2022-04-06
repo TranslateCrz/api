@@ -9,7 +9,7 @@ db-migrate:
 	$(CON) doctrine:migrations:migrate -n --allow-no-migration
 
 db-reset:
-	-$(CON) doctrine:database:drop --force --if-exists
+	$(CON) doctrine:database:drop --force --if-exists
 	$(MAKE) db-create
 	$(MAKE) db-migrate
 
@@ -23,6 +23,12 @@ clear:
 
 test-unit:
 	php bin/phpunit tests/Unit
+
+test-api-lite:
+	$(MAKE) db-migrate
+	$(MAKE) fixtures-install
+	$(CON) cache:clear
+	php bin/phpunit tests/Functional
 
 test-api:
 	$(MAKE) clear
