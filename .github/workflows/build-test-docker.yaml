@@ -35,4 +35,4 @@ jobs:
       - name: Execute tests with db
         env:
           DATABASE_URL: sqlite:///%kernel.project_dir%/data/database.sqlite
-        run: make test-api
+        run: make test-api-lite
