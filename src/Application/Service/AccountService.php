@@ -9,6 +9,7 @@ use App\Domain\Factory\AccountFactory;
 use App\Domain\Service\AccountService as AccountDomainService;
 use App\Entity\Account;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class AccountService
 {
@@ -42,7 +43,7 @@ class AccountService
         return $account;
     }
 
-    public function get(?string $id = null): ?Account
+    public function get(?string $id = null): null|Account|UserInterface
     {
         if ($id) {
             return $this->repository->findByUuid($id);
@@ -86,6 +87,6 @@ class AccountService
             $this->repository->delete($account);
         }
 
-        return (bool)$account;
+        return (bool) $account;
     }
 }

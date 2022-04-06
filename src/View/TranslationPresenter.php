@@ -20,6 +20,7 @@ class TranslationPresenter
 
     /**
      * @param iterable|Translation[] $translations
+     *
      * @return array|TranslationView[]
      */
     public function presentTranslations(iterable $translations): array

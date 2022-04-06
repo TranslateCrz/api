@@ -21,7 +21,7 @@ class Validator
     {
         $errors = $this->validator->validate($object);
         if (count($errors) > 0) {
-            throw new ValidationException((string) $errors);
+            throw new ValidationException((string) $errors); // @phpstan-ignore-line
         }
     }
 }

@@ -21,6 +21,7 @@ class AccountPresenter
 
     /**
      * @param iterable|Account[] $accounts
+     *
      * @return array|AccountView[]
      */
     public function presentAccounts(iterable $accounts): array

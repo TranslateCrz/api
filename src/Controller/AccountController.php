@@ -29,6 +29,7 @@ class AccountController extends AbstractController
         $dto->email = $body['email'] ?? null;
         $dto->countries = $body['countries'] ?? [];
         $dto->company = $body['company'] ?? null;
+
         return $this->json($this->presenter->presentAccount($this->accountService->create($dto)));
     }
 
@@ -38,6 +39,7 @@ class AccountController extends AbstractController
         if (!$user = $this->accountService->getByEmail($request->toArray()['email'] ?? '')) {
             throw $this->createAccessDeniedException();
         }
+
         return $this->json(['token' => $user->getEmail()]);
     }
 
@@ -47,6 +49,7 @@ class AccountController extends AbstractController
         if (!$user = $this->accountService->get()) {
             $this->createNotFoundException();
         }
+
         return $this->json($this->presenter->presentAccount($user));
     }
 
@@ -61,6 +64,7 @@ class AccountController extends AbstractController
         if (!$user = $this->accountService->update(null, $dto)) {
             $this->createNotFoundException();
         }
+
         return $this->json($this->presenter->presentAccount($user));
     }
 }

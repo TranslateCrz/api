@@ -29,6 +29,7 @@ class TranslationController extends AbstractController
         $dto->code = $body['code'] ?? null;
         $dto->country = $body['country'] ?? null;
         $dto->value = $body['value'] ?? null;
+
         return $this->json($this->translationPresenter->presentTranslation($this->translationService->create($dto)));
     }
 
@@ -48,6 +49,7 @@ class TranslationController extends AbstractController
     public function addCodes(Request $request): Response
     {
         $this->translationService->createCodes($request->toArray());
+
         return $this->json(['success' => true, 'codes' => count($request->toArray())]);
     }
 
@@ -56,6 +58,7 @@ class TranslationController extends AbstractController
     {
         $dto = new TranslationDto();
         $dto->value = $request->toArray()['value'] ?? null;
+
         return $this->json($this->translationPresenter->presentTranslation($this->translationService->update($id, $dto)));
     }
 

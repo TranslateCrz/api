@@ -21,7 +21,7 @@ class AppFixtures extends Fixture
                 'company' => 'Hetic',
                 'countries' => ['fr', 'en', 'es'],
                 'roles' => ['ROLE_USER', 'ROLE_ADMIN'],
-            ]
+            ],
         ];
         foreach ($accounts as $data) {
             $account = new Account($data['email']);
