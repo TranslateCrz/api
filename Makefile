@@ -24,12 +24,6 @@ clear:
 test-unit:
 	php bin/phpunit tests/Unit
 
-test-api-lite:
-	$(MAKE) db-migrate
-	$(MAKE) fixtures-install
-	$(CON) cache:clear
-	php bin/phpunit tests/Functional
-
 test-api:
 	$(MAKE) clear
 	php bin/phpunit tests/Functional
