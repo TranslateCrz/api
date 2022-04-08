@@ -67,11 +67,7 @@ class AccountService
 
     public function update(?string $id, RegisterDto $dto): ?Account
     {
-        if ($id) {
-            $account = $this->get($id);
-        } else {
-            $account = $this->security->getUser();
-        }
+        $account = $this->get($id);
 
         if ($account) {
             $account = $this->service->updateTranslation($account, $dto->countries, $dto->company);
