@@ -198,6 +198,7 @@ class AccountServiceTest extends UnitTestCase
             ->willReturn($this->getAccount())
         ;
     }
+
     public function expectServiceToUpdate(): void
     {
         $this->accountDomainService->expects($this->once())
