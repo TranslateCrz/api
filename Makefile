@@ -24,6 +24,10 @@ clear:
 test-unit:
 	php bin/phpunit tests/Unit
 
+test-api:
+	$(MAKE) clear
+	php bin/phpunit tests/Functional
+
 test-static:
 	php vendor/bin/phpstan analyse -l 3 src tests
 

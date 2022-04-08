@@ -5,6 +5,16 @@ on: [push]
 jobs:
   build-test:
     runs-on: ubuntu-latest
+    services:
+      database:
+        image: mysql:latest
+        env:
+          MYSQL_DATABASE: localize
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_PASSWORD: admin
+          MYSQL_USER: user
+        ports:
+          - 3306:3306
     steps:
       - name: Run php setup
         uses: shivammathur/setup-php@v2
@@ -28,3 +38,7 @@ jobs:
       - run: make test-psr
       - run: make test-static
       - run: make test-unit
+      - name: Execute tests with db
+        env:
+          DATABASE_URL: mysql://user:admin@127.0.0.1:3306/localize?serverVersion=8.0
+        run: make test-api
