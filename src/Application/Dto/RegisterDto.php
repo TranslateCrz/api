@@ -14,5 +14,5 @@ class RegisterDto
     ])]
     public array $countries;
 
-    public ?string $company;
+    public ?string $company = null;
 }

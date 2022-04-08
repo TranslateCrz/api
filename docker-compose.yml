@@ -10,6 +10,8 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_PASSWORD: admin
       MYSQL_USER: user
+    ports:
+      - 3306:3306
     volumes:
       - ./docker/mysql:/var/lib
       - ./application/api/migration:/migration
