@@ -1,8 +1,7 @@
 FROM php:8.1-fpm-alpine
 
-# Arguments defined in docker-compose.yml
-ARG user
-ARG uid
+ARG user=localize
+ARG uid=1000
 
 ARG ssh_prv_key
 ARG ssh_pub_key

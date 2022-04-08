@@ -29,9 +29,6 @@ services:
 
   app:
     build:
-      args:
-        user: localize
-        uid: 1000
       context: ./
       dockerfile: ./docker/php/Dockerfile
     container_name: localize-app

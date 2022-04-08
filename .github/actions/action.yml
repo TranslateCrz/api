@@ -1,0 +1,5 @@
+name: 'Setup PHP'
+description: 'Install php with composer'
+runs:
+  using: 'docker'
+  image: '../../docker/php/Dockerfile'

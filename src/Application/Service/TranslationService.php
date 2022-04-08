@@ -116,6 +116,6 @@ class TranslationService
             $this->repository->delete($translation);
         }
 
-        return (bool)$translation;
+        return (bool) $translation;
     }
 }
