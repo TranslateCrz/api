@@ -8,6 +8,21 @@ use Doctrine\Persistence\ObjectManager;
 
 class AppFixtures extends Fixture
 {
+    const ACCOUNTS = [
+        [
+            'email' => 'c_croizat@hetic.eu',
+            'company' => 'Hetic',
+            'countries' => ['fr', 'en', 'es'],
+            'roles' => ['ROLE_USER', 'ROLE_ADMIN'],
+        ],
+        [
+            'email' => 'corentin.croizat@hetic.net',
+            'company' => null,
+            'countries' => ['fr', 'en', 'es'],
+            'roles' => ['ROLE_USER'],
+        ],
+    ];
+
     public function load(ObjectManager $manager): void
     {
         $this->loadAccounts($manager);
@@ -15,15 +30,7 @@ class AppFixtures extends Fixture
 
     public function loadAccounts(ObjectManager $manager): void
     {
-        $accounts = [
-            [
-                'email' => 'c_croizat@hetic.eu',
-                'company' => 'Hetic',
-                'countries' => ['fr', 'en', 'es'],
-                'roles' => ['ROLE_USER', 'ROLE_ADMIN'],
-            ],
-        ];
-        foreach ($accounts as $data) {
+        foreach (self::ACCOUNTS as $data) {
             $account = new Account($data['email']);
             $account
                 ->setCountries($data['countries'])
