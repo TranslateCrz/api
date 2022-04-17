@@ -16,7 +16,7 @@ class AdminControllerTest extends ControllerTestCase
 
     public function testGetAllAccount(): void
     {
-        $this->createClientWithCredentials()->request('GET', '/admin/account');
+        $this->createRequest('/admin/account');
 
         $this->assertResponseIsSuccessful();
         $this->assertJsonContains([
@@ -30,7 +30,7 @@ class AdminControllerTest extends ControllerTestCase
     public function testDeleteAccount(): void
     {
         $account = AppFixtures::ACCOUNTS[1];
-        $this->createClientWithCredentials()->request('DELETE', '/admin/account/'.$this->getAccountIdByEmail($account['email']));
+        $this->createRequest('/admin/account/'.$this->getAccountIdByEmail($account['email']), 'DELETE');
 
         $this->assertResponseIsSuccessful();
         $this->assertJsonEquals([

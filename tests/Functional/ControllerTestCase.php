@@ -14,9 +14,17 @@ abstract class ControllerTestCase extends ApiTestCase
         self::bootKernel();
     }
 
-    protected function createClientWithCredentials(string $token = 'c_croizat@hetic.eu'): Client
+    protected function createClientWithCredentials(string $token = AppFixtures::ACCOUNTS[0]['email']): Client
     {
         return static::createClient([], ['headers' => ['authorization' => $token]]);
+    }
+
+    protected function createRequest(string $url = '/', string $method = 'GET', array $data = [], Client $client = null): void
+    {
+        if (!$client) {
+            $client = $this->createClientWithCredentials();
+        }
+        $client->request($method, $url, ['body' => json_encode($data)]);
     }
 
     protected function getAccountIdByEmail(string $email = AppFixtures::ACCOUNTS[0]['email']): string
