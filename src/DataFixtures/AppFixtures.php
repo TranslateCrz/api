@@ -8,7 +8,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class AppFixtures extends Fixture
 {
-    const ACCOUNTS = [
+    public const ACCOUNTS = [
         [
             'email' => 'c_croizat@hetic.eu',
             'company' => 'Hetic',

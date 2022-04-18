@@ -23,7 +23,7 @@ class AdminControllerTest extends ControllerTestCase
             [
                 'email' => AppFixtures::ACCOUNTS[0]['email'],
                 'company' => AppFixtures::ACCOUNTS[0]['company'],
-            ]
+            ],
         ]);
     }
 
