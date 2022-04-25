@@ -36,6 +36,6 @@ class AdminController extends AbstractController
     #[Route('/admin/account/{id}', methods: ['DELETE'])]
     public function deleteAccount(string $id): Response
     {
-        return $this->json($this->accountService->delete($id));
+        return $this->json(['deleted' => $this->accountService->delete($id)]);
     }
 }

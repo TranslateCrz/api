@@ -65,6 +65,6 @@ class TranslationController extends AbstractController
     #[Route('/translation/{id}', methods: ['DELETE'])]
     public function delete(string $id): Response
     {
-        return $this->json($this->translationService->delete($id));
+        return $this->json(['deleted' => $this->translationService->delete($id)]);
     }
 }

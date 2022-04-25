@@ -48,15 +48,8 @@ class TranslationService
         }
 
         $this->validator->validate($dto);
-        foreach ($account->getCountries() as $country) {
-            if ($country === $dto->country) {
-                $t = $translation = $this->factory->createTranslation($account, $dto->code, $dto->country, $dto->value);
-            } else {
-                $t = $this->factory->createTranslation($account, $dto->code, $country);
-            }
-            $this->repository->persist($t);
-        }
-        $this->repository->flush();
+        $translation = $this->factory->createTranslation($account, $dto->code, $dto->country, $dto->value);
+        $this->repository->save($translation);
         if ($dto->value) {
             $this->messageService->publish($translation);
         }
