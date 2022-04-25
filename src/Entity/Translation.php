@@ -20,7 +20,7 @@ class Translation extends Aggregate
     #[ORM\ManyToOne(targetEntity: Account::class)]
     private Account $account;
 
-    public function __construct(Account $account, string $code, string $country = 'FRA')
+    public function __construct(Account $account, string $code, string $country = 'fr')
     {
         parent::__construct();
         $this->code = $code;
