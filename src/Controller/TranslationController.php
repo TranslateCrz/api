@@ -21,7 +21,7 @@ class TranslationController extends AbstractController
         $this->translationPresenter = $translationPresenter;
     }
 
-    #[Route('/translation', methods: ['POST'])]
+    #[Route('/translations', methods: ['POST'])]
     public function create(Request $request): Response
     {
         $dto = new TranslationDto();
@@ -33,19 +33,19 @@ class TranslationController extends AbstractController
         return $this->json($this->translationPresenter->presentTranslation($this->translationService->create($dto)));
     }
 
-    #[Route('/translation/{id}', methods: ['GET'])]
+    #[Route('/translations/{id}', methods: ['GET'])]
     public function get(string $id): Response
     {
         return $this->json($this->translationPresenter->presentTranslation($this->translationService->get($id)));
     }
 
-    #[Route('/translation', methods: ['GET'])]
+    #[Route('/translations', methods: ['GET'])]
     public function getAll(): Response
     {
         return $this->json($this->translationPresenter->presentTranslations($this->translationService->getAll()));
     }
 
-    #[Route('/translation/codes', methods: ['POST'])]
+    #[Route('/translations/codes', methods: ['POST'])]
     public function addCodes(Request $request): Response
     {
         $this->translationService->createCodes($request->toArray());
@@ -53,7 +53,7 @@ class TranslationController extends AbstractController
         return $this->json(['success' => true, 'codes' => count($request->toArray())]);
     }
 
-    #[Route('/translation/{id}', methods: ['PUT'])]
+    #[Route('/translations/{id}', methods: ['PUT'])]
     public function update(string $id, Request $request): Response
     {
         $dto = new TranslationDto();
@@ -62,7 +62,7 @@ class TranslationController extends AbstractController
         return $this->json($this->translationPresenter->presentTranslation($this->translationService->update($id, $dto)));
     }
 
-    #[Route('/translation/{id}', methods: ['DELETE'])]
+    #[Route('/translations/{id}', methods: ['DELETE'])]
     public function delete(string $id): Response
     {
         return $this->json(['deleted' => $this->translationService->delete($id)]);
