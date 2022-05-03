@@ -27,13 +27,13 @@ class AdminController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/account', methods: ['GET'])]
+    #[Route('/admin/accounts', methods: ['GET'])]
     public function getAccounts(): Response
     {
         return $this->json($this->presenter->presentAccounts($this->accountService->getAll()));
     }
 
-    #[Route('/admin/account/{id}', methods: ['DELETE'])]
+    #[Route('/admin/accounts/{id}', methods: ['DELETE'])]
     public function deleteAccount(string $id): Response
     {
         return $this->json(['deleted' => $this->accountService->delete($id)]);
