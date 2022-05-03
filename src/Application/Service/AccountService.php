@@ -3,6 +3,7 @@
 namespace App\Application\Service;
 
 use App\Application\Dto\RegisterDto;
+use App\Application\Exception\Exception;
 use App\Application\Repository\AccountRepositoryInterface;
 use App\Application\Validator\Validator;
 use App\Domain\Factory\AccountFactory;
@@ -36,6 +37,9 @@ class AccountService
     public function create(RegisterDto $dto): Account
     {
         $this->validator->validate($dto);
+        if ($this->repository->findByEmail($dto->email)) {
+            throw new Exception('Email already exist');
+        }
 
         $account = $this->factory->createAccount($dto->email, $dto->countries, $dto->company);
         $this->repository->save($account);

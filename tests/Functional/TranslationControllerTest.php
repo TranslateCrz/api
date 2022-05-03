@@ -14,7 +14,7 @@ class TranslationControllerTest extends ControllerTestCase
             'value' => 'Le titre de l\'article',
         ];
 
-        $this->createRequest('/translation', 'POST', $translation);
+        $this->createRequest('/translations', 'POST', $translation);
 
         $this->assertResponseIsSuccessful();
         $this->assertJsonContains($translation);
@@ -24,7 +24,7 @@ class TranslationControllerTest extends ControllerTestCase
     {
         $translationId = $this->getTranslationIdByCodeAndEmail();
 
-        $this->createRequest('/translation/'.$translationId);
+        $this->createRequest('/translations/'.$translationId);
 
         $this->assertResponseIsSuccessful();
         $this->assertJsonContains(AppFixtures::ACCOUNTS[0]['translations'][0]);
@@ -32,7 +32,7 @@ class TranslationControllerTest extends ControllerTestCase
 
     public function testGetAll(): void
     {
-        $this->createRequest('/translation');
+        $this->createRequest('/translations');
 
         $this->assertResponseIsSuccessful();
         $this->assertJsonContains(AppFixtures::ACCOUNTS[0]['translations']);
@@ -48,7 +48,7 @@ class TranslationControllerTest extends ControllerTestCase
         $translationId = $this->getTranslationIdByCodeAndEmail();
         $title = 'Le nouveau titre de la page d\'accueil';
 
-        $this->createRequest('/translation/'.$translationId, 'PUT', ['value' => $title]);
+        $this->createRequest('/translations/'.$translationId, 'PUT', ['value' => $title]);
 
         $this->assertResponseIsSuccessful();
         $this->assertJsonContains([
@@ -62,7 +62,7 @@ class TranslationControllerTest extends ControllerTestCase
     {
         $translationId = $this->getTranslationIdByCodeAndEmail();
 
-        $this->createRequest('/translation/'.$translationId, 'DELETE');
+        $this->createRequest('/translations/'.$translationId, 'DELETE');
 
         $this->assertResponseIsSuccessful();
         $this->assertJsonEquals([
