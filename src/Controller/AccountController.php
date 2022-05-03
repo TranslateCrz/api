@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Application\Dto\RegisterDto;
+use App\Application\Exception\Exception;
 use App\Application\Service\AccountService;
 use App\View\AccountPresenter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -37,7 +38,7 @@ class AccountController extends AbstractController
     public function login(Request $request): Response
     {
         if (!$user = $this->accountService->getByEmail($request->toArray()['email'] ?? '')) {
-            throw $this->createAccessDeniedException();
+            throw new Exception('Access denied', 403);
         }
 
         return $this->json(['token' => $user->getEmail()]);

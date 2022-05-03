@@ -27,3 +27,7 @@ services:
 
     App\Application\Service\GCPMessageService:
         arguments: ['%gcp_topic%', '%gcp_keyfile%', '%kernel.project_dir%']
+
+    App\EventListener\ExceptionListener:
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }
